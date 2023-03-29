@@ -1,0 +1,27 @@
+.header-container {
+  border-bottom: 1px solid black;
+
+  .header-details {
+    margin: 0 auto;
+    max-width: 640px;
+
+    .header-details-alignment {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      .button-left-container,
+      .button-right-container {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .header-title {
+        margin: 0 auto;
+        h1 {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

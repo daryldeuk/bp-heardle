@@ -1,0 +1,23 @@
+.answer-lists-container {
+  // style={{ maxWidth: "640px", margin: "0 auto" }}
+  max-width: 640px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  .answer-lists-space {
+    height: 20px;
+  }
+  .answer-box {
+    margin-bottom: 8px;
+
+    .answer-view {
+      height: 20px;
+      border: 1px solid black;
+      padding: 8px;
+
+      .answer-skip,
+      .answer-not-skip {
+        display: "flex";
+      }
+    }
+  }
+}

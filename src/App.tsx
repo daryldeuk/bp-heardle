@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useCallback, useState } from "react";
+import { Answer, AnswerLists, Description, Header, ProgressBar } from "./components";
 
-function App() {
+const CORRECT_ANSWER = "test";
+export const App: FC = () => {
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [answerCount, setAnswerCount] = useState<number>(1);
+  const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const handleSkip = useCallback(() => {
+    setAnswerCount((prevState) => prevState + 1);
+    setAnswers((prevState) => [...prevState, "SKIPPED"]);
+  }, []);
+  const handleSubmit = useCallback((e: string) => {
+    if (e === CORRECT_ANSWER) {
+      setIsCorrect(true);
+    } else {
+      setAnswers((prevState) => [...prevState, e]);
+      setAnswerCount((prevState) => prevState + 1);
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ margin: "0 auto" }}>
+      <Header />
+      {!isCorrect && answers.length < 6 && (
+        <>
+          <AnswerLists answers={answers} />
+          <Description />
+          <ProgressBar answerCount={answerCount} />
+          <Answer handleSkip={handleSkip} answerCount={answerCount} handleSubmit={handleSubmit} />
+        </>
+      )}
+      {!isCorrect && answers.length === 6 && <div>Better luck next time</div>}
+      {isCorrect && <div>Congrats</div>}
     </div>
   );
-}
-
+};
+App.displayName = "App";
 export default App;
